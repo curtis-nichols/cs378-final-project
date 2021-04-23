@@ -13,10 +13,14 @@ def performSetup() -> bool:
     print(commandsToRun)
 
     for command in commandsToRun:
+        successRequired = True
+        if(command[0] == "#"):
+            successRequired = False
+            command = command[1:]
         output = os.system(command)
-        print(output)
-        if output != 0:
-            print("An command was unsuccessful, edit the command file and try running this again!")
+        print(command, output)
+        if successRequired and output != 0:
+            print("A command was unsuccessful, edit the command file and try running this again!")
             return False
     
     print("The hotspot was successfully set up and configured to redirect to your Apache2 website!")
