@@ -1,4 +1,5 @@
 #service network-manager stop
+#airmon-ng check kill
 echo 1 > /proc/sys/net/ipv4/ip_forward
 iptables --flush
 iptables --table nat --flush
