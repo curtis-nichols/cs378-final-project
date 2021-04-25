@@ -1,17 +1,20 @@
 import os
+import config
+from typing import List
 
-#make more stuff configurable later
-commandsFile = "hotspot_setup_commands.txt"
-#commandsFile = "test.txt"
+def readFileLines(fileName: str) -> List[str]:
+    f = open(fileName, "r")
+    fileLines = [line.rstrip() for line in f]
+    f.close()
+    return fileLines
 
-def performSetup() -> bool:
-    #read in shell commands to execute
-    f = open(commandsFile, "r")
-    commandsToRun = [line.rstrip() for line in f]
+def writeFileContents(fileName:str, contents: List[str]) -> None:
+    f = open(fileName, "w")
+    for line in contents:
+        f.write(line + "\n")
     f.close()
 
-    print(commandsToRun)
-
+def runCommands(commandsToRun: List[str]) -> bool:
     for command in commandsToRun:
         successRequired = True
         if(command[0] == "#"):
@@ -25,6 +28,21 @@ def performSetup() -> bool:
     
     print("The hotspot was successfully set up and configured to redirect to your Apache2 website!")
     return True
+
+def performSetup() -> bool:
+    #read in shell commands to execute
+    commandsToRun = readFileLines(config.COMMANDS_FILE)
+    dnsmasqTemplate = readFileLines(config.DNSMASQ_TEMPLATE_FILE)
+    hostapdTemplate = readFileLines(config.HOSTAPD_TEMPLATE_FILE)
+
+    #replace variables in the template file with our configuration
+    dnsmasqFile = [line.format(wifiInterface=config.WIFI_INTERFACE) for line in dnsmasqTemplate]
+    hostapdFile = [line.format(wifiInterface=config.WIFI_INTERFACE, ssid=config.HOSTAPD_SSID, driver=config.HOSTAPD_DRIVER) for line in hostapdTemplate]
+
+    writeFileContents("dnsmasq.conf", dnsmasqFile)
+    writeFileContents("hostapd.conf", hostapdFile)
+
+    return runCommands(commandsToRun)
 
 if __name__ == "__main__":
     performSetup()
