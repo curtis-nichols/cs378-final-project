@@ -12,7 +12,7 @@ cs378-final-project
 
 # for capturing packets, 
 we can do 
-- sudo tcpdump -D : find avaialble interfaces for capture
-- sudo tcpdump --interface <interface> -w output.pcap
+- sudo tcpdump -D : find available interfaces for capture
+- sudo tcpdump --interface $interface -w output.pcap
 
 Let me know if we need to filter anything
