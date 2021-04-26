@@ -22,7 +22,7 @@ def runCommands(commandsToRun: List[str]) -> bool:
             continue
         #put this character at the start for commands that 
         #aren't required to have exit code 0
-        else if(command[0] == "!"):
+        elif(command[0] == "!"):
             successRequired = False
             command = command[1:]
         output = os.system(command)
