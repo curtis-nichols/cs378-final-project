@@ -17,7 +17,12 @@ def writeFileContents(fileName:str, contents: List[str]) -> None:
 def runCommands(commandsToRun: List[str]) -> bool:
     for command in commandsToRun:
         successRequired = True
-        if(command[0] == "#"):
+        #allow comments in the commands file
+        if command[0] == "#":
+            continue
+        #put this character at the start for commands that 
+        #aren't required to have exit code 0
+        else if(command[0] == "!"):
             successRequired = False
             command = command[1:]
         output = os.system(command)
