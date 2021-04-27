@@ -14,6 +14,7 @@ iptables --delete-chain
 iptables --table nat --delete-chain
 iptables -P FORWARD ACCEPT
 dnsmasq -C dnsmasq.conf
+dnsmasq -C dnsmasq-internet-access.conf -p 1054
 ifconfig wlan0 10.0.0.1 netmask 255.255.255.0
 service apache2 start
 #run hostapd in background
