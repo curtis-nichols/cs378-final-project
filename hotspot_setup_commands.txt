@@ -1,8 +1,12 @@
 #kill stuff that might interfere with networking
 !service network-manager stop
 !airmon-ng check kill
+#remove whatever is already inside apache document root
+rm -r /var/www/html
 #copy captive portal website to default apache document root
 cp -R login-page/* /var/www/html 
+#make sure apache2 can write to the directory
+chown www-data /var/www/html
 echo 1 > /proc/sys/net/ipv4/ip_forward
 iptables --flush
 iptables --table nat --flush
