@@ -2,7 +2,7 @@
 !service network-manager stop
 !airmon-ng check kill
 #remove whatever is already inside apache document root
-rm -r /var/www/html
+!rm -r /var/www/html/*
 #copy captive portal website to default apache document root
 cp -R login-page/* /var/www/html 
 #make sure apache2 can write to the directory
@@ -16,5 +16,8 @@ iptables -P FORWARD ACCEPT
 dnsmasq -C dnsmasq.conf
 ifconfig wlan0 10.0.0.1 netmask 255.255.255.0
 service apache2 start
+#iptables stuff
+iptables --table nat --append POSTROUTING --out-interface eth0 -j MASQUERADE
+iptables --append FORWARD --in-interface wlan0 -j ACCEPT
 #run hostapd in background
 hostapd hostapd.conf -B
