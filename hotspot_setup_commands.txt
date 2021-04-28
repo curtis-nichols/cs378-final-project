@@ -1,6 +1,7 @@
 #kill stuff that might interfere with networking
 !service network-manager stop
 !airmon-ng check kill
+!killall dnsmasq
 #remove whatever is already inside apache document root
 !rm -r /var/www/html/*
 #copy captive portal website to default apache document root
