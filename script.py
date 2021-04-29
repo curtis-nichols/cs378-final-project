@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+import shutil
 import os
 def main():
 	parser = ArgumentParser()
@@ -8,8 +9,6 @@ def main():
 
 	args = parser.parse_args()
 	print(args)
-	#writing the output path to a tmp file for website to read
-	with open('/tmp/wifeyePath.txt', 'w') as f:
-		f.write(os.path.abspath(args.output))
-
+	input("Press Enter to continue...")
+	shutil.copy('/var/www/html/wifeyeData.txt', os.path.abspath(args.output))
 main()
