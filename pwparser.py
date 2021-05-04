@@ -26,8 +26,9 @@ def load_input(a: Dict[str, str]) -> None:
     option_o = False
     #'-o' Option
     if a.output:
+        name = a.output.split(".")
         option_o = True
-        given_output_filename = a.output + "_result.txt"
+        given_output_filename = name[0] + "_result.txt"
 
     #'d' Option
     if a.database:
