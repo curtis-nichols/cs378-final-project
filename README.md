@@ -12,7 +12,12 @@ cs378-final-project
 
 # Options
 -n, --name: Sets the name of the fake wifi network (default='Fake Access Point')
+
 -o, --output: Sets the destination for the output file (default='output')
+
 -d, --database: Set the password data dump
+
 -w, --wifiInterface: Sets the wifi interface (default='wlan0')
+
 -i, --internetInterface: Sets the internet interface (default='eth0')
+
