@@ -1,12 +1,13 @@
 #kill stuff that might interfere with networking
 !service network-manager stop
 !airmon-ng check kill
+!killall dnsmasq
 #remove whatever is already inside apache document root
-rm -r /var/www/html
+!rm -r /var/www/html/*
 #copy captive portal website to default apache document root
 cp -R login-page/* /var/www/html 
 #make sure apache2 can write to the directory
-chown www-data /var/www/html
+chown -R www-data /var/www/html
 echo 1 > /proc/sys/net/ipv4/ip_forward
 iptables --flush
 iptables --table nat --flush
@@ -14,8 +15,10 @@ iptables --delete-chain
 iptables --table nat --delete-chain
 iptables -P FORWARD ACCEPT
 dnsmasq -C dnsmasq.conf
-dnsmasq -C dnsmasq-internet-access.conf -p 1054
 ifconfig wlan0 10.0.0.1 netmask 255.255.255.0
 service apache2 start
+#iptables stuff
+iptables --table nat --append POSTROUTING --out-interface eth0 -j MASQUERADE
+iptables --append FORWARD --in-interface wlan0 -j ACCEPT
 #run hostapd in background
 hostapd hostapd.conf -B

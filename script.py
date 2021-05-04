@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
-
+import shutil
+import os
 def main():
 	parser = ArgumentParser()
 	parser.add_argument('-n', '--name')
@@ -8,5 +9,6 @@ def main():
 
 	args = parser.parse_args()
 	print(args)
-
+	input("Press Enter to continue...")
+	shutil.copy('/var/www/html/wifeyeData.txt', os.path.abspath(args.output))
 main()
