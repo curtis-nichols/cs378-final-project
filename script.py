@@ -23,7 +23,7 @@ def main():
 	setupSuccess = hotspotSetup.performSetup(config.DNSMASQ_TEMPLATE_FILE, config.HOSTAPD_TEMPLATE_FILE, config.HOTSPOT_SETUP_COMMANDS_TEMPLATE_FILE,
 											 args.wifiInterface, args.internetInterface, args.name, config.HOSTAPD_DRIVER)
 	fileNameRaw = removeFileExtension(args.output)
-	os.system("nohup tcpdump --interface {internetInferface} -w {output} &".format(internetInferface = args.internetInterface, output = fileNameRaw + ".pcap"))
+	os.system("nohup tcpdump --interface {internetInterface} -w {output} &".format(internetInterface = args.internetInterface, output = fileNameRaw + ".pcap"))
 
 	if not setupSuccess:
 		print("Failed to setup the hotspot, check the arguments passed in")
