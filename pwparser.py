@@ -25,20 +25,14 @@ def load_input(a: Dict[str, str]) -> None:
     option_d = False
     option_o = False
     #'-o' Option
-    if '-o' in a:
+    if a.output:
         option_o = True
-        given_output_filename = a['-o'] + "_result.txt"
-    elif '--output' in a:
-        option_o = True
-        given_output_filename = a['--output'] + "_result.txt"
+        given_output_filename = a.output + "_result.txt"
 
     #'d' Option
-    if '-d' in a:
+    if a.database:
         option_d = True
-        given_dictionary_filename = a['-d']
-    elif '--database' in a:
-        option_d = True
-        given_dictionary_filename = a['--database']
+        given_dictionary_filename = a.database
 
 #if the user gives us a filename, we'll want to read that one
 def parse_file(sin: IO[str]) -> None:
