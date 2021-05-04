@@ -25,6 +25,8 @@ def main():
 
 	input("Press Enter to continue...")
 	shutil.copy('/var/www/html/wifeyeData.txt', os.path.abspath(args.output))
+	#stop tcpdump
+	os.system("kill $(ps -e | pgrep tcpdump)")
 
 	users = read_cp_output_lines(os.path.abspath(args.output))
 	for user in users:
