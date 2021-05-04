@@ -1,4 +1,0 @@
-A search on the victim's email address "kevin@123.net" returned these results:
-csgogod
-A search on the victim's password "password1" returned these results:
-['jiho@123.net']

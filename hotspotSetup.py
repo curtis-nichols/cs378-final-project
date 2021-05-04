@@ -1,5 +1,4 @@
 import os
-import config
 from typing import List
 
 def readFileLines(fileName: str) -> List[str]:
@@ -34,20 +33,22 @@ def runCommands(commandsToRun: List[str]) -> bool:
     print("The hotspot was successfully set up and configured to redirect to your Apache2 website!")
     return True
 
-def performSetup() -> bool:
+def performSetup(dnsmasqTemplateFile: str, hostapdTemplateFile:str, hotspotSetupCommandsTemplateFile:str,
+                 wifiInterface:str, internetInferface:str, ssid:str, driver:str) -> bool:
     #read in shell commands to execute
-    commandsToRun = readFileLines(config.COMMANDS_FILE)
-    dnsmasqTemplate = readFileLines(config.DNSMASQ_TEMPLATE_FILE)
-    hostapdTemplate = readFileLines(config.HOSTAPD_TEMPLATE_FILE)
+    dnsmasqTemplate = readFileLines(dnsmasqTemplateFile)
+    hostapdTemplate = readFileLines(hostapdTemplateFile)
+    commandsToRunTemplate = readFileLines(hotspotSetupCommandsTemplateFile)
 
     #replace variables in the template file with our configuration
-    dnsmasqFile = [line.format(wifiInterface=config.WIFI_INTERFACE) for line in dnsmasqTemplate]
-    hostapdFile = [line.format(wifiInterface=config.WIFI_INTERFACE, ssid=config.HOSTAPD_SSID, driver=config.HOSTAPD_DRIVER) for line in hostapdTemplate]
+    dnsmasqFile = [line.format(wifiInterface=wifiInterface) for line in dnsmasqTemplate]
+    hostapdFile = [line.format(wifiInterface=wifiInterface, ssid=ssid, driver=driver) for line in hostapdTemplate]
+    commandsToRunFile = [line.format(wifiInterface=wifiInterface, internetInferface=internetInferface) for line in commandsToRunTemplate]
 
     writeFileContents("dnsmasq.conf", dnsmasqFile)
     writeFileContents("hostapd.conf", hostapdFile)
 
-    return runCommands(commandsToRun)
+    return runCommands(commandsToRunFile)
 
 if __name__ == "__main__":
     performSetup()
