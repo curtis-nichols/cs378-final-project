@@ -17,12 +17,12 @@ def main():
 	print(args)
 
 	setupSuccess = hotspotSetup.performSetup(config.DNSMASQ_TEMPLATE_FILE, config.HOSTAPD_TEMPLATE_FILE, config.HOTSPOT_SETUP_COMMANDS_TEMPLATE_FILE,
-											 args.wifiInterface, args.internetInferface, config.HOSTAPD_DRIVER)
+											 args.wifiInterface, args.internetInterface, config.HOSTAPD_DRIVER)
 
 	if not setupSuccess:
 		print("Failed to setup the hotspot, check the arguments passed in")
 		return
-										
+
 	input("Press Enter to continue...")
 	shutil.copy('/var/www/html/wifeyeData.txt', os.path.abspath(args.output))
 

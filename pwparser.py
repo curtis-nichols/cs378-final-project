@@ -5,7 +5,6 @@
 from sys import stdin, stdout
 from typing import IO, Tuple, Union, List, Dict
 from pickler import load_from_disk
-import nltk                     #$pip3 install nltk
 
 #global data
 dump_dict = {}                  #username to associated password list
