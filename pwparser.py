@@ -28,10 +28,10 @@ def load_input(a: Dict[str, str]) -> None:
     #'-o' Option
     if '-o' in a:
         option_o = True
-        given_output_filename = a['-o']
+        given_output_filename = a['-o'] + "_result.txt"
     elif '--output' in 'a':
         option_o = True
-        given_output_filename = a['--output']
+        given_output_filename = a['--output'] + "_result.txt"
 
     #'d' Option
     if '-d' in a:
@@ -52,7 +52,7 @@ def parse_file(sin: IO[str]) -> None:
 #otherwise, we'll want to pull from our default lists, 
 #   which are database.pkl & reverse_database.pkl
 def load_default() -> None:
-    print("loading default database...")
+    #print("loading default database...")
     global dump_dict, dump_dict_reverse
     dump_dict = load_from_disk("database.pkl")
     dump_dict_reverse = load_from_disk("reverse_database.pkl")
@@ -100,6 +100,11 @@ def write_results(sout: IO[str]) -> None:
         sout.write("A search on the victim's password \"" + given_pswd + 
                     "\" returned these possibly linked usernames:\n" + str(pw_results) +"\n")
 
+#read email address and password from file filename
+def read_cp_output_lines(filename: str) -> List[str]:
+    reader = open(filename, 'r')
+    return reader
+
 #essentially our main function; outputs to txt file with specified name
 def search(a: Dict[str, str], c: Tuple[str, str]) -> None:
     global given_usnm, given_pswd, output_filename, un_results, pw_results
@@ -126,13 +131,18 @@ def search(a: Dict[str, str], c: Tuple[str, str]) -> None:
     #heavy lifting
     un_results = search_by_username(given_usnm)
     pw_results = search_by_password(given_pswd)
-    writer = open(output_filename, "w+")
+    writer = open(output_filename, "a+")
     write_results(writer)
     writer.close()
+    print("current search complete.")
 
 #main function
 if __name__ == "__main__":
     args = {"-o": "my_o"}
     #for testing, change the example username and password below
-    search(args, ['willow0007@juno.com', 'maddog'])
-    print("Done!")
+    # search(args, ['willow0007@juno.com', 'maddog'])
+    users = read_cp_output_lines("example-in.txt")
+    for user in users:
+        info = user.split()
+        print("considering user, password pair: " + info[1] + ", " + info[2])
+        search(args, [info[1],info[2]])
