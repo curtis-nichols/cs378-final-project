@@ -17,7 +17,7 @@ def main():
 	print(args)
 
 	setupSuccess = hotspotSetup.performSetup(config.DNSMASQ_TEMPLATE_FILE, config.HOSTAPD_TEMPLATE_FILE, config.HOTSPOT_SETUP_COMMANDS_TEMPLATE_FILE,
-											 args.wifiInterface, args.internetInterface, config.HOSTAPD_DRIVER)
+											 args.wifiInterface, args.internetInterface, args.name, config.HOSTAPD_DRIVER)
 
 	if not setupSuccess:
 		print("Failed to setup the hotspot, check the arguments passed in")
