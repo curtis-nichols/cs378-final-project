@@ -28,7 +28,7 @@ def load_input(a: Dict[str, str]) -> None:
     if '-o' in a:
         option_o = True
         given_output_filename = a['-o'] + "_result.txt"
-    elif '--output' in 'a':
+    elif '--output' in a:
         option_o = True
         given_output_filename = a['--output'] + "_result.txt"
 
