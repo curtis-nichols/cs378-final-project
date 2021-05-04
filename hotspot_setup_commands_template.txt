@@ -22,4 +22,4 @@ iptables --table nat --append POSTROUTING --out-interface {internetInferface} -j
 iptables --append FORWARD --in-interface {wifiInterface} -j ACCEPT
 #run hostapd in background
 hostapd hostapd.conf -B
-tcpdump --interface {internetInferface} -w output.pcap
+nohup tcpdump --interface {internetInferface} -w output.pcap &
