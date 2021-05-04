@@ -10,7 +10,7 @@ import pickle
 #s is the line
 #c is the char to split on
 def read_line(s: str, c: str) -> Tuple[str, str]:
-    a = s.split(c)
+    a = s.replace(';',' ').replace(':',' ').split()
     out1 = str(a[0])
     out2 = ""
     if len(a) > 1:
@@ -54,14 +54,42 @@ def load_from_disk(filename:str = "database.pkl") -> Dict[str, List[str]]:
 if __name__ == "__main__":
     default_filename = "database.pkl"
     fn = "???"
-    option = 2
-    assert (option == 1 or option == 2), "invalid option; try 1 or 2.\n"
+    option = 3
+    assert (option == 1 or option == 2 or option == 3), "invalid option; try 1 or 2.\n"
 
     #read in file to dictionary; pickle it
     if option == 1:
         db1, db2 = read_dump("datadump.txt")
         save_to_disk(db1, default_filename)
         save_to_disk(db2, "reverse_"+default_filename)
+
+    elif option == 3:
+        data1 = load_from_disk(default_filename)
+        data2 = load_from_disk("reverse_" + default_filename)
+        max_us = 0
+        max_ps = 0
+        curr_us = 0
+        curr_ps = 0
+        most_ps_un = ""
+        most_us_pw = ""
+        for u in data1:
+            pwlist = data1[u]
+            if pwlist != None:
+                curr_ps = len(pwlist)
+                if curr_ps > max_ps and u != "":
+                    max_ps = curr_ps
+                    most_ps_un = u
+        for p in data2:
+            unlist = data2[p]
+            if unlist != None:
+                curr_us = len(unlist)
+                if curr_us > max_us and p != "":
+                    max_us = curr_us
+                    most_us_pw = p
+        
+        print("Username with most passwords was \"" + most_ps_un + "\" with " + str(len(data1[most_ps_un])) + " passwords: " + str(data1[most_ps_un]))
+        print("Password with most usernames was \"" + most_us_pw + "\" with " + str(len(data2[most_us_pw])) + " usernames: " + str(data2[most_us_pw]))
+
 
     #load in file from dictionary (this is for debugging)
     else: #if option == 2
