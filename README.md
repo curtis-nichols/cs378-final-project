@@ -10,9 +10,14 @@ cs378-final-project
 -apt-get install hostapd dnsmasq
 
 
-# for capturing packets, 
-we can do 
-- sudo tcpdump -D : find available interfaces for capture
-- sudo tcpdump --interface $interface -w output.pcap
+# Options
+-n, --name: Sets the name of the fake wifi network (default='Fake Access Point')
 
-Let me know if we need to filter anything
+-o, --output: Sets the destination for the output file (default='output')
+
+-d, --database: Set the password data dump
+
+-w, --wifiInterface: Sets the wifi interface (default='wlan0')
+
+-i, --internetInterface: Sets the internet interface (default='eth0')
+
