@@ -5,10 +5,6 @@ import os
 import hotspotSetup
 import config
 
-def removeFileExtension(fileName:str):
-	periodIndex = fileName.find(".")
-	return fileName[:periodIndex]
-
 def main():
 	parser = ArgumentParser()
 	parser.add_argument('-n', '--name', default='Fake Access Point')
@@ -22,7 +18,8 @@ def main():
 
 	setupSuccess = hotspotSetup.performSetup(config.DNSMASQ_TEMPLATE_FILE, config.HOSTAPD_TEMPLATE_FILE, config.HOTSPOT_SETUP_COMMANDS_TEMPLATE_FILE,
 											 args.wifiInterface, args.internetInterface, args.name, config.HOSTAPD_DRIVER)
-	fileNameRaw = removeFileExtension(args.output)
+	fileName = os.path.split(os.path.abspath(args.output))
+	fileNameRaw = fileName[0] + "/" + os.path.splitext(fileName[1])[0]
 	os.system("nohup tcpdump --interface {internetInterface} -w {output} &".format(internetInterface = args.internetInterface, output = fileNameRaw + ".pcap"))
 
 	if not setupSuccess:

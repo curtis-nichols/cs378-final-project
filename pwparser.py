@@ -5,6 +5,7 @@
 from sys import stdin, stdout
 from typing import IO, Tuple, Union, List, Dict
 from pickler import load_from_disk
+import os
 
 #global data
 dump_dict = {}                  #username to associated password list
@@ -26,9 +27,10 @@ def load_input(a: Dict[str, str]) -> None:
     option_o = False
     #'-o' Option
     if a.output:
-        name = a.output.split(".")
+        fileName = os.path.split(os.path.abspath(a.output))
+        fileNameRaw = fileName[0] + "/" + os.path.splitext(fileName[1])[0]
         option_o = True
-        given_output_filename = name[0] + "_result.txt"
+        given_output_filename = fileNameRaw + "_result.txt"
 
     #'d' Option
     if a.database:

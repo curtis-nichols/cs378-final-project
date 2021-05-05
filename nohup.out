@@ -1,0 +1,44 @@
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+7380 packets captured
+7427 packets received by filter
+0 packets dropped by kernel
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+6 packets captured
+6 packets received by filter
+0 packets dropped by kernel
+112 packets captured
+112 packets received by filter
+0 packets dropped by kernel
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+449 packets captured
+455 packets received by filter
+0 packets dropped by kernel
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+90 packets captured
+90 packets received by filter
+0 packets dropped by kernel
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+164 packets captured
+164 packets received by filter
+0 packets dropped by kernel
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+2004 packets captured
+2004 packets received by filter
+0 packets dropped by kernel
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+56 packets captured
+93 packets received by filter
+0 packets dropped by kernel
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+2785 packets captured
+2785 packets received by filter
+0 packets dropped by kernel
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+1459 packets captured
+1459 packets received by filter
+0 packets dropped by kernel
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+132 packets captured
+132 packets received by filter
+0 packets dropped by kernel
