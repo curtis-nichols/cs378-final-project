@@ -1,6 +1,10 @@
 # cs378-final-project
 cs378-final-project
 
+# How to run code
+
+- python3 script.py
+
 # Prereqs
 
 -running in kali as root
